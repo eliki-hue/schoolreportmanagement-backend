@@ -12,3 +12,10 @@ class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
         fields = ['id', 'name', 'scores']
+
+    def create(self, validated_data):
+        scores_data = validated_data.pop('scores')
+        student = Student.objects.create(**validated_data)
+        for score_data in scores_data:
+            Score.objects.create(student=student, **score_data)
+        return student
