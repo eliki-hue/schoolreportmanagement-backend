@@ -1,9 +1,9 @@
 from django.urls import path
-from .views import submit_student_data, view_student_results
-
+from . import views
 urlpatterns = [
-    path('students/', submit_student_data, name='submit_student_data'),
-    path('results/', view_student_results, name='view_student_results'),
-    path('results/<pk>', view_student_results, name='view_student_results'),
+    path('submit_students_results/', views.submit_student_data, name='submit_student_data'),
+    path('get_all_results/', views.view_all_students_results, name='view_student_results'),
+    path('get_single_results/<pk>', views.view_student_results, name='view_student_results'),
+    path('update_students/<int:pk>/', views.StudentUpdateView.as_view(), name='student-update'),
 
 ]
