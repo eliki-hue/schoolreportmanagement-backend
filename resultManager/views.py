@@ -49,3 +49,13 @@ class result_Update(APIView):
 class StudentUpdateView(generics.UpdateAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
+
+class record_Delete(APIView):
+    def delete(self,request, pk):
+        item = Student.objects.get(id=pk)
+        
+        if item :
+            item.delete()
+            return Response("user deleted")
+        else:
+            return Response("user not found", status=status.HTTP_404_NOT_FOUND)
