@@ -22,3 +22,9 @@ def view_student_results(request):
     serializer = StudentSerializer(results, many=True)
     return Response(serializer.data, status=200)
     
+@api_view(['GET'])
+def view_student_results(request,pk):
+    
+    results = Student.objects.filter(id=pk)
+    serializer = StudentSerializer(results, many=True)
+    return Response(serializer.data, status=200)
